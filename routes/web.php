@@ -1,30 +1,8 @@
 <?php
 
+use App\Models\Blog;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
-
-class Blog
-{
-    public static function all()
-    {
-        return [
-            [
-                'id' => 1,
-                'slug' => 'judul-artikel-1',
-                'title' => 'Judul Artikel 1',
-                'author' => 'Irfan Muria',
-                'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, repellat.'
-            ],
-            [
-                'id' => 2,
-                'slug' => 'judul-artikel-2',
-                'title' => 'Judul Artikel 2',
-                'author' => 'Firza Rastid Muria',
-                'body' => 'Halo Zaza'
-            ]
-            ];
-    }
-}
 
 // Route halaman utama
 Route::get('/', function () {
@@ -42,26 +20,8 @@ Route::get('/blogs', function () {
 });
 
 Route::get('/blogs/{slug}', function ($slug) {
-    $blogs = [
-        [
-            'id' => 1,
-            'slug' => 'judul-artikel-1',
-            'title' => 'Judul Artikel 1',
-            'author' => 'Irfan Muria',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, repellat Quos, repellat. consectetur adipisicing elit. Quos, repellat.'
-        ],
-        [
-            'id' => 2,
-            'slug' => 'judul-artikel-2',
-            'title' => 'Judul Artikel 2',
-            'author' => 'Firza Rastid Muria',
-            'body' => 'Halo Zaza'
-        ]
-    ];
 
-    $blog = Arr::first($blogs, function ($blog) use ($slug) {
-        return $blog['slug'] == $slug;
-    });
+    $blog = Blog::find($slug);
 
     return view('blog', ['title' => 'Single Blog', 'blog' => $blog]);
 });
