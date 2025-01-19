@@ -3,6 +3,29 @@
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
+class Blog
+{
+    public static function all()
+    {
+        return [
+            [
+                'id' => 1,
+                'slug' => 'judul-artikel-1',
+                'title' => 'Judul Artikel 1',
+                'author' => 'Irfan Muria',
+                'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, repellat.'
+            ],
+            [
+                'id' => 2,
+                'slug' => 'judul-artikel-2',
+                'title' => 'Judul Artikel 2',
+                'author' => 'Firza Rastid Muria',
+                'body' => 'Halo Zaza'
+            ]
+            ];
+    }
+}
+
 // Route halaman utama
 Route::get('/', function () {
     return view('home', ['title' => 'Home Page']);
@@ -15,40 +38,29 @@ Route::get('/about', function () {
 
 // Route halaman blog
 Route::get('/blogs', function () {
-    return view('blogs', ['title' => 'Blog', 'blogs' => [
-        [
-            'id' => 1,
-            'title' => 'Judul Artikel 1',
-            'author' => 'Irfan Muria',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, repellat.'
-        ],
-        [
-            'id' => 2,
-            'title' => 'Judul Artikel 2',
-            'author' => 'Hasna Nazriah',
-            'body' => 'Love you hasna'
-        ]
-    ]]);
+    return view('blogs', ['title' => 'Blog', 'blogs' => Blog::all()]);
 });
 
-Route::get('/blog/{id}', function ($id) {
+Route::get('/blogs/{slug}', function ($slug) {
     $blogs = [
         [
             'id' => 1,
+            'slug' => 'judul-artikel-1',
             'title' => 'Judul Artikel 1',
             'author' => 'Irfan Muria',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, repellat.'
+            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, repellat Quos, repellat. consectetur adipisicing elit. Quos, repellat.'
         ],
         [
             'id' => 2,
+            'slug' => 'judul-artikel-2',
             'title' => 'Judul Artikel 2',
-            'author' => 'Hasna Nazriah',
-            'body' => 'Love you hasna'
+            'author' => 'Firza Rastid Muria',
+            'body' => 'Halo Zaza'
         ]
     ];
 
-    $blog = Arr::first($blogs, function ($blog) use ($id) {
-        return $blog['id'] == $id;
+    $blog = Arr::first($blogs, function ($blog) use ($slug) {
+        return $blog['slug'] == $slug;
     });
 
     return view('blog', ['title' => 'Single Blog', 'blog' => $blog]);
