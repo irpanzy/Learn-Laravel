@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('author');
-            $table->date('date');
+            $table->string('name');
             $table->string('slug')->unique();
-            $table->string('body');
+            $table->string('image_path')->nullable(); // Kolom untuk menyimpan path gambar
             $table->timestamps();
         });
     }

@@ -1,6 +1,4 @@
 <x-layout>
-    <x-slot:title>{{ $title }}</x-slot:title>
-
     @foreach ($blogs as $blog)
         <article class="py-8 max-w-screen-md border-b border-gray-300">
             <a href="/blogs/{{ $blog['slug'] }}" class="hover:underline">

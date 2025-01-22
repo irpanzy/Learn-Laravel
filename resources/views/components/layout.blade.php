@@ -15,17 +15,12 @@
 <body class="h-full">
     <div class="min-h-full">
         <x-navbar></x-navbar>
-
-        <x-header>{{ $title }}</x-header>
-
         <main>
-            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            {{-- <div class="mx-auto max-w-7xl px-4 py-0 sm:px-6 lg:px-8"> --}}
                 {{ $slot }}
-            </div>
+            {{-- </div> --}}
         </main>
-
     </div>
-
 </body>
 
 </html>
